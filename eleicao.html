@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEIÇÕES SOFTEX</title>
+    <style>
+        body {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>  
+    <div id="resultado">
+
+    </div>
+    <script>
+        let candidatoX = 0
+        let candidatoY = 0
+        let candidatoZ = 0
+        let votoBranco = 0
+        let votoNulo = 0
+        let votacao = true
+        let op
+        let voto
+        
+        function receberCandidato () {
+            voto = window.prompt('Por favor digite o número correspondente ao candidato:\nCandidato X = 889\nCandidato Y = 847\nCandidato Z = 515\nVoto em branco = 0')
+        }
+
+        function atribuirVotos () {
+            if (voto == 889) {
+                candidatoX = candidatoX + 1
+            }
+            else if (voto == 847) {
+                candidatoY = candidatoY + 1 
+            }
+            else if (voto == 515) {
+                candidatoZ = candidatoZ + 1             
+            }
+            else if (voto == '0') {
+                votoBranco = votoBranco + 1 
+            }
+            else if (voto.length = 0) {
+                votoNulo = votoNulo + 1
+            }
+            else if (isNaN(voto)) {
+                window.alert('Inválido! Digite números')
+            }
+            else {
+                votoNulo = votoNulo + 1
+            } 
+        }
+
+        function mostrarResultado() {
+            let vencedor = 0
+
+            if (candidatoX >= candidatoY && candidatoX >= candidatoZ) {
+                vencedor = 'Candidato X'
+            } 
+            else if (candidatoY >= candidatoX && candidatoY >= candidatoZ) {
+                vencedor = 'Candidato Y'
+            }
+            else {
+                vencedor = 'Candidato Z'
+            }
+            //Se não tiver nenhum voto pra algum canditado, exibi o resultado sem mostrar o vencedor
+            if (candidatoX == 0 && candidatoY == 0 && candidatoZ == 0) {
+                resultado.innerHTML = `Resultado da Votação <br/> Candidato X: ${candidatoX} votos <br/> Candidato Y: ${candidatoY} votos <br/> Candidato Z: ${candidatoZ} votos <br/> Votos em branco: ${votoBranco} votos <br/> Votos Nulo: ${votoNulo} votos`
+            }
+            //Resultado caso haja voto válido pra algum candidato
+            else {
+            resultado.innerHTML = `Resultado da Votação <br/> O vencedor é o ${vencedor}<br> Candidato X: ${candidatoX} votos <br/> Candidato Y: ${candidatoY} votos <br/> Candidato Z: ${candidatoZ} votos <br/> Votos em branco: ${votoBranco} votos <br/> Votos Nulo: ${votoNulo} votos`
+        }
+        }
+
+        while (votacao == true) {
+            receberCandidato()
+            atribuirVotos()
+            mostrarResultado()
+            
+            op = window.prompt('Deseja encerrar a votação?\nDigite [E] para encerrar ou [C] para continuar')
+            op = op.toUpperCase()
+            
+            if (op == 'E') {
+                break
+            }
+            else if (op == 'C'){
+                votacao == true
+            }
+            else {
+                window.alert('Comando inválido!')
+            }     
+        }
+    </script>
+</body>
+</html>
